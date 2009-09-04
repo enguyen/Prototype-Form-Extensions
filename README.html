@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <title>Prototype Form Extensions</title>
+    <link rel="stylesheet" type="text/css" href="shared/style.css">
+    <script src="shared/prototype.js"></script>  
+    <script src="prototype-form-ex.js"></script>  
+  </head>
+  <body>
+    <div class="title">
+      Prototype Form Extensions
+    </div>
+    <div id="content">
+      <h1>
+        Checkboxes and Radio Buttons
+      </h1>      
+      <p>
+        For some reason, Prototype still does not give developers convenient 
+        APIs for dealing with checkboxes and radio buttons. These extensions 
+        allow you to use Prototype's convenient $F() syntax to get and set the 
+        values of these grouped input elements. They've been tested with
+        Prototype 1.6.0.3 and 1.6.1.
+      </p>
+        
+      <h2>Example 1: Checkboxes</h2>
+      
+      <p>
+        Which fruits do you like? Check them off and then click "Print Checked
+        Fruits." The one line of code doing the work simply calls
+        <code>$F($("form").fruits)</code>, something not possible without
+        these extensions. That method call returns an array of values for the
+        checked items.
+      </p>
+      
+      <form id="form">
+        Fruits:
+        <input type="checkbox" name="fruits" checked="true" value="orange"/> Orange
+        <input type="checkbox" name="fruits" checked="true" value="kiwi"/> Kiwi
+        <input type="checkbox" name="fruits" checked="true" value="lychee"/> Lychee
+        <input type="checkbox" name="fruits" value="apple"/> Apple
+        <input type="checkbox" name="fruits" value="durian"/> Durian
+      </form>
+      
+      <input type="button" onclick="printChecked()" value="Print Checked Fruits" />
+      
+      <div id="output" class="graybox" style="display:none;"></div>
+    
+      <script type="text/javascript" charset="utf-8">
+        function printChecked() {
+          $("output").show();
+          $("output").innerHTML = "[" + $F($("form").fruits) + "]";
+        }        
+      </script>
+      
+      <h2>Example 2: Setting checkbox values</h2>
+      
+      <p>
+        The extended <code>setValue()</code> now also works with checkboxes. 
+        You can use any array. The checkboxes below are set directly from the
+        return value of calling <code>$F()</code> on the checked values above.
+      </p>
+      
+      <form id="form2">
+        Fruits:
+        <input type="checkbox" name="fruits" value="orange"/> Orange
+        <input type="checkbox" name="fruits" value="kiwi"/> Kiwi
+        <input type="checkbox" name="fruits" value="lychee"/> Lychee
+        <input type="checkbox" name="fruits" value="apple"/> Apple
+        <input type="checkbox" name="fruits" value="durian"/> Durian
+      </form>
+      
+      <input type="button" onclick="setChecked()" value="Copy Checked Fruits from Above" />
+    
+      <script type="text/javascript" charset="utf-8">
+        function setChecked() {
+          Field.setValue($("form2").fruits, $F($("form").fruits));
+        }        
+      </script>
+      
+      <h1>
+        Other Features
+      </h1>
+      
+      <p>
+        This little helper script also includes methods for getting and setting
+        the cursor position in a textarea, and an extension to Ajax.Request that
+        allows you to abort an operation cleanly. Enjoy!
+      </p>
+    
+      <p class="footer">
+      &copy; 2009 Eric Nguyen | Licenses:
+        <a href="http://opensource.org/licenses/lgpl-2.1.php" rel="license">LGPL (source code)</a> 
+        and 
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">
+          <abbr title="Creative Commons Attribution-Share Alike 3.0 License">CC BY-SA</abbr> (documentation)
+        </a>.
+      </p>
+      
+    </div>  
+  </body>
+</html>
